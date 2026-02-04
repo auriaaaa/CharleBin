@@ -2,7 +2,7 @@
 /**
  * PrivateBin
  *
- * a zero-knowledge paste bin
+ * A zero-knowledge paste bin
  *
  * @link      https://github.com/PrivateBin/PrivateBin
  * @copyright 2012 Sébastien SAUVAGE (sebsauvage.net)
@@ -18,19 +18,19 @@ use PDO;
 /**
  * Configuration
  *
- * parses configuration file, ensures default values present
+ * Parses configuration file, ensures default values present
  */
 class Configuration
 {
     /**
-     * parsed configuration
+     * Parsed configuration
      *
      * @var array
      */
     private $_configuration;
 
     /**
-     * default configuration
+     * Default configuration
      *
      * @var array
      */
@@ -101,7 +101,7 @@ class Configuration
     );
 
     /**
-     * parse configuration file and ensure default configuration values are present
+     * Parse configuration file and ensure default configuration values are present
      *
      * @throws Exception
      */
@@ -129,7 +129,7 @@ class Configuration
 
         $opts = '_options';
         foreach (self::getDefaults() as $section => $values) {
-            // fill missing sections with default values
+            // Fill missing sections with default values
             if (!array_key_exists($section, $config) || count($config[$section]) == 0) {
                 $this->_configuration[$section] = $values;
                 if (array_key_exists('dir', $this->_configuration[$section])) {
@@ -137,7 +137,7 @@ class Configuration
                 }
                 continue;
             }
-            // provide different defaults for database model
+            // Provide different defaults for database model
             elseif (
                 $section == 'model_options' && in_array(
                     $this->_configuration['model']['class'],
@@ -191,7 +191,7 @@ class Configuration
                 }
                 $this->_configuration[$section] = $config[$section];
             }
-            // check for missing keys and set defaults if necessary
+            // Check for missing keys and set defaults if necessary
             else {
                 foreach ($values as $key => $val) {
                     if ($key == 'dir') {
@@ -221,7 +221,7 @@ class Configuration
             }
         }
 
-        // support for old config file format, before the fork was renamed and PSR-4 introduced
+        // Support for old config file format, before the fork was renamed and PSR-4 introduced
         $this->_configuration['model']['class'] = str_replace(
             'zerobin_', 'privatebin_',
             $this->_configuration['model']['class']
@@ -233,12 +233,12 @@ class Configuration
             $this->_configuration['model']['class']
         );
 
-        // ensure a valid expire default key is set
+        // Ensure a valid expire default key is set
         if (!array_key_exists($this->_configuration['expire']['default'], $this->_configuration['expire_options'])) {
             $this->_configuration['expire']['default'] = key($this->_configuration['expire_options']);
         }
 
-        // ensure the basepath ends in a slash, if one is set
+        // Ensure the basepath ends in a slash, if one is set
         if (
             strlen($this->_configuration['main']['basepath']) &&
             substr_compare($this->_configuration['main']['basepath'], '/', -1) !== 0
@@ -248,7 +248,7 @@ class Configuration
     }
 
     /**
-     * get configuration as array
+     * Get configuration as array
      *
      * @return array
      */
@@ -258,7 +258,7 @@ class Configuration
     }
 
     /**
-     * get default configuration as array
+     * Get default configuration as array
      *
      * @return array
      */
@@ -268,7 +268,7 @@ class Configuration
     }
 
     /**
-     * get a key from the configuration, typically the main section or all keys
+     * Get a key from the configuration, typically the main section or all keys
      *
      * @param string $key
      * @param string $section defaults to main
@@ -285,7 +285,7 @@ class Configuration
     }
 
     /**
-     * get a section from the configuration, must exist
+     * Get a section from the configuration, must exist
      *
      * @param string $section
      * @throws Exception
