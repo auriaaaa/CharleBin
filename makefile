@@ -9,5 +9,5 @@ test:
 	./vendor/bin/phpunit tst
 	
 lint:
-	$(CURDIR)/vendor/bin/phpcs --extensions=php $(CURDIR)/lib/
-    $(CURDIR)/vendor/bin/phpmd $(CURDIR)/lib ansi codesize,unusedcode,naming
+	./vendor/bin/phpcs --extensions=php ./lib/
+ 	./vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
