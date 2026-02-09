@@ -10,4 +10,4 @@ test:
 	
 lint:
 	./vendor/bin/phpcs --extensions=php ./lib/
- 	./vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
+	./vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
