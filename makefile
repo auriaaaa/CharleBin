@@ -9,5 +9,6 @@ test:
 	./vendor/bin/phpunit tst
 	
 lint:
-	./vendor/bin/phpcs --extensions=php ./lib/
-	./vendor/bin/phpmd ./lib ansi codesize,unusedcode,naming
+	find . -type f -name '*.php' -exec php -l {} \;
+	"./vendor/bin/phpcs" --extensions=php ./lib/
+	"./vendor/bin/phpmd" ./lib ansi codesize,unusedcode,naming
