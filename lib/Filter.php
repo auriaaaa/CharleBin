@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PrivateBin
  *
@@ -22,32 +23,36 @@ use Exception;
 class Filter
 {
     /**
-     * format a given time string into a human readable label (localized)
-     *
-     * accepts times in the format "[integer][time unit]"
+     * format a given time value and unit into a human readable label (localized)
      *
      * @access public
      * @static
-     * @param  string $time
+     * @param  int    $value
+     * @param  string $unit
      * @throws Exception
      * @return string
      */
-    public static function formatHumanReadableTime($time)
+    public static function formatHumanReadableTime($value, $unit)
     {
-        if (preg_match('/^(\d+) *(\w+)$/', $time, $matches) !== 1) {
-            throw new Exception("Error parsing time format '$time'", 30);
+        if (!is_int($value) || $value < 0) {
+            throw new Exception("Value must be a non-negative integer", 30);
         }
-        switch ($matches[2]) {
+        if (!is_string($unit) || empty($unit)) {
+            throw new Exception("Unit must be a non-empty string", 30);
+        }
+
+        switch ($unit) {
             case 'sec':
-                $unit = 'second';
+                $unitName = 'second';
                 break;
             case 'min':
-                $unit = 'minute';
+                $unitName = 'minute';
                 break;
             default:
-                $unit = rtrim($matches[2], 's');
+                $unitName = rtrim($unit, 's');
         }
-        return I18n::_(array('%d ' . $unit, '%d ' . $unit . 's'), (int) $matches[1]);
+
+        return I18n::_(array('%d ' . $unitName, '%d ' . $unitName . 's'), $value);
     }
 
     /**
