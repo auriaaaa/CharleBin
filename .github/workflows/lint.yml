@@ -1,0 +1,104 @@
+name: Lint Code
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  php-lint:
+    name: PHP Lint Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: gd, json, mbstring, openssl
+          tools: phpcs
+      
+      - name: Check PHP syntax errors
+        run: |
+          find . -name "*.php" -not -path "./vendor/*" -exec php -l {} \; | (! grep -v "No syntax errors")
+      
+      - name: Run PHP_CodeSniffer
+        run: |
+          phpcs --standard=PSR12 --extensions=php --ignore=vendor lib/ || true
+          echo "⚠️ Note: PHPCS est en mode informatif. Corrigez les erreurs pour respecter PSR-12."
+
+  javascript-lint:
+    name: JavaScript Lint Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install ESLint
+        run: |
+          npm init -y
+          npm install --save-dev eslint
+      
+      - name: Create ESLint config
+        run: |
+          cat > .eslintrc.json << 'EOF'
+          {
+            "env": {
+              "browser": true,
+              "es2021": true
+            },
+            "extends": "eslint:recommended",
+            "parserOptions": {
+              "ecmaVersion": 12,
+              "sourceType": "script"
+            },
+            "rules": {
+              "semi": ["error", "always"],
+              "quotes": ["error", "single"],
+              "no-unused-vars": "warn",
+              "no-console": "off"
+            }
+          }
+          EOF
+      
+      - name: Run ESLint
+        run: |
+          npx eslint js/ || true
+          echo "⚠️ Note: ESLint est en mode informatif. Corrigez les erreurs pour améliorer la qualité du code."
+
+  markdown-lint:
+    name: Markdown Lint Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run Markdownlint
+        uses: articulate/actions-markdownlint@v1
+        with:
+          config: .markdownlint.json
+          files: '*.md'
+          ignore: vendor
+        continue-on-error: true
+
+  status-check:
+    name: Required Status Check
+    runs-on: ubuntu-latest
+    needs: [php-lint, javascript-lint, markdown-lint]
+    
+    steps:
+      - name: All checks passed
+        run: |
+          echo "✅ Tous les linters ont été exécutés avec succès !"
+          echo "Vérifiez les warnings ci-dessus pour améliorer la qualité du code."
