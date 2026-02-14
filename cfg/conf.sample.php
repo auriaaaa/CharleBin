@@ -245,4 +245,4 @@ dir = PATH "data"
 ; (optional) the "signature" (access key) issued by YOURLS for the using account
 ; signature = ""
 ; (optional) the URL of the YOURLS API, called to shorten a PrivateBin URL
-; apiurl = "https://yourls.example.com/yourls-api.php"
+; apiurl = "https://yourls.example.com/yourls-api.php" */
