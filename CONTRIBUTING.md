@@ -2,11 +2,11 @@
 
 ## 📋 Table des matières
 
-1. [Comment contribuer](#comment-contribuer)
-2. [Processus de Pull Request](#processus-de-pull-request)
-3. [Standards de code](#standards-de-code)
-4. [Convention de nommage](#convention-de-nommage)
-5. [Tests](#tests)
+1. [Comment contribuer](#-comment-contribuer)
+2. [Processus de Pull Request](#-processus-de-pull-request)
+3. [Standards de code](#-standards-de-code)
+4. [Convention de nommage](#%EF%B8%8F-convention-de-nommage)
+5. [Tests](#-tests)
 
 ---
 
@@ -41,6 +41,7 @@ git checkout -b feature/ma-nouvelle-fonctionnalite
 ### 4. Tester
 
 Testez votre code localement avant de soumettre :
+
 - Vérifiez qu'il n'y a pas d'erreurs PHP
 - Testez les fonctionnalités dans différents navigateurs
 - Assurez-vous que les tests existants passent
@@ -122,6 +123,7 @@ Une fois approuvée, votre PR sera mergée par un mainteneur du projet.
 - Une classe par fichier
 
 **Exemple :**
+
 ```php
 <?php
 
@@ -150,6 +152,7 @@ class MaClasse
 - Quotes simples pour les chaînes
 
 **Exemple :**
+
 ```javascript
 const maFonction = (param) => {
   if (condition) {
@@ -170,16 +173,20 @@ const maFonction = (param) => {
 ## 🏷️ Convention de nommage
 
 ### Variables et fonctions
+
 - PHP : `camelCase` ou `snake_case` selon PSR-12
 - JavaScript : `camelCase`
 
 ### Classes
+
 - `PascalCase`
 
 ### Constantes
+
 - `UPPERCASE_SNAKE_CASE`
 
 ### Fichiers
+
 - Classes : `PascalCase.php`
 - Autres : `lowercase-kebab-case.php`
 
@@ -192,12 +199,14 @@ const maFonction = (param) => {
 Avant de soumettre votre code, exécutez les linters :
 
 **PHP (si configuré) :**
+
 ```bash
 # PHP_CodeSniffer
 phpcs --standard=PSR12 lib/
 ```
 
 **JavaScript (si configuré) :**
+
 ```bash
 # ESLint
 eslint js/
@@ -206,11 +215,13 @@ eslint js/
 ### Tests manuels
 
 Testez votre code dans :
+
 - Chrome/Chromium
 - Firefox
 - Safari (si possible)
 
 Vérifiez :
+
 - Le chiffrement/déchiffrement fonctionne
 - Pas d'erreurs dans la console
 - L'interface est responsive
@@ -221,6 +232,7 @@ Vérifiez :
 ## 📝 Documentation
 
 Si vous ajoutez une nouvelle fonctionnalité :
+
 - Mettez à jour le README.md
 - Ajoutez des commentaires dans le code
 - Documentez les nouvelles options de configuration
