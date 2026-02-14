@@ -2,13 +2,11 @@
 
 ## 📋 Table des matières
 
-1. [Code de conduite](#code-de-conduite)
-2. [Comment contribuer](#comment-contribuer)
-3. [Processus de Pull Request](#processus-de-pull-request)
-4. [Standards de code](#standards-de-code)
-5. [Convention de nommage](#convention-de-nommage)
-6. [Tests](#tests)
-
+1. [Comment contribuer](#comment-contribuer)
+2. [Processus de Pull Request](#processus-de-pull-request)
+3. [Standards de code](#standards-de-code)
+4. [Convention de nommage](#convention-de-nommage)
+5. [Tests](#tests)
 
 ---
 
@@ -27,6 +25,7 @@ git checkout -b feature/ma-nouvelle-fonctionnalite
 ```
 
 **Convention de nommage des branches :**
+
 - `feature/description` : pour les nouvelles fonctionnalités
 - `fix/description` : pour les corrections de bugs
 - `docs/description` : pour la documentation
@@ -57,6 +56,7 @@ git commit -m "docs: mise à jour du README"
 ```
 
 **Convention des commits :**
+
 - `feat:` nouvelle fonctionnalité
 - `fix:` correction de bug
 - `docs:` documentation
@@ -91,6 +91,7 @@ Ouvrez une PR depuis votre fork vers la branche `main` de CharleBin.
 ### Template de PR
 
 Utilisez le template fourni (`.github/PULL_REQUEST_TEMPLATE.md`) qui inclut :
+
 - Description des changements
 - Type de changement
 - Checklist de validation
